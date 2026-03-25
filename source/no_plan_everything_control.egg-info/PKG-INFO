@@ -1,0 +1,57 @@
+Metadata-Version: 2.4
+Name: no_plan_everything_control
+Version: 0.1.0
+Summary: AICON: Active InterCONnect — Isaac Lab implementation of 'No Plan but Everything Under Control' (Mengers & Brock, ICRA 2025)
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: torch>=2.0
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: matplotlib; extra == "dev"
+
+# AICON in Isaac Lab
+
+Implementation of **"No Plan but Everything Under Control: Robustly Solving Sequential Tasks
+with Dynamically Composed Gradient Descent"** (Mengers & Brock, ICRA 2025) inside Isaac Lab.
+
+## Quick Start
+
+```bash
+# Install in the Isaac Lab python env
+cd /run/media/adhitya/Steam1/IsaacLab
+./_isaac_sim/python.sh -m pip install -e /run/media/adhitya/Steam1/no_plan_everything_control
+
+# Run Blocks World experiment
+./isaaclab.sh -p /run/media/adhitya/Steam1/no_plan_everything_control/scripts/run_blocks_world.py
+
+# Run Drawer Manipulation experiment
+./isaaclab.sh -p /run/media/adhitya/Steam1/no_plan_everything_control/scripts/run_drawer_manipulation.py
+
+# Run tests
+./_isaac_sim/python.sh -m pytest /run/media/adhitya/Steam1/no_plan_everything_control/tests/ -v
+```
+
+## Paper
+
+See [PAPER.md](PAPER.md) for full extracted math, pseudocode, and experiment specs.
+
+## Implementation Plan
+
+See [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) for the phased roadmap with acceptance criteria.
+
+## Structure
+
+```
+source/no_plan_everything_control/
+├── aicon/           Pure PyTorch AICON kernel (no Isaac Lab imports)
+├── envs/
+│   ├── blocks_world/          Experiment 1
+│   └── drawer_manipulation/   Experiment 2
+└── experiments/               High-level experiment drivers
+scripts/             Isaac Lab entry-points
+baselines/           State-space and belief-space planners for comparison
+tools/               Evaluation and plotting utilities
+tests/               Unit and integration tests
+```
